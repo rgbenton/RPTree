@@ -51,7 +51,7 @@ import ca.pfv.spmf.tools.MemoryLogger;
  * @see FPTree
  * @see Itemset
  * @see Itemsets
- * @author Philippe Fournier-Viger
+ * @author Philippe Fournier-Viger, Ryan Benton, Blake Johns
  */
 public class AlgoRPGrowth {
 
@@ -62,7 +62,7 @@ public class AlgoRPGrowth {
 		 private int itemsetCount; // number of freq. itemsets found
 
 		 // parameter
-		 public int minRareSupportRelative;//the relative minimum rare support  -- Blake Johns
+		 public int minRareSupportRelative;//the relative minimum rare support
 		 public int minSupportRelative; // the relative minimum support
 		 
 		 BufferedWriter writer = null; // object to write the output file
@@ -133,7 +133,7 @@ public class AlgoRPGrowth {
 
 		   // convert the minimum support as percentage to a relative minimum support
 		   // convert the minimum rare support as percentage to a minimum rare support
-		   this.minRareSupportRelative = (int) Math.ceil(minraresupp * transactionCount);// --Blake Johns
+		   this.minRareSupportRelative = (int) Math.ceil(minraresupp * transactionCount);
 		   this.minSupportRelative = (int) Math.ceil(minsupp * transactionCount); 
 		   
 		   // (2) Scan the database again to build the initial RP-Tree
@@ -160,11 +160,10 @@ public class AlgoRPGrowth {
 		     // for each item in the transaction
 		     for(String itemString : lineSplited){
 		       Integer item = Integer.parseInt(itemString);
-		       //--Blake / Ryan--
-		       // only add items that have less or equal to the minimum support 
-		       // and more than / equal to the minimum rare support
+		// only add items that have less than or equal to the minimum support 
+	    // and more than or equal to the minimum rare support
 		       if(mapSupport.get(item) >= minRareSupportRelative){
-		    	   //so the items are reading that they are > minRareSupportRelative
+		    	   //so the items being added are >= minRareSupportRelative
 		    	  transaction.add(item);}																
 		     }
 		
@@ -180,9 +179,8 @@ public class AlgoRPGrowth {
 		         return compare;}	       
 		     });
 		     //Add the sorted items to the RP tree
-		     //--Blake / Ryan--
-		     //If (last item in sorted trans is < minRelSup, we accept the transaction)   		     
-		     //get the last item in transaction as the last item in the transaction is the smallest count size
+		     //If (last item in sorted transaction is < minRelSup, we accept the transaction)   		     
+		     //get the last item in transaction; because the last item in the transaction is the smallest count size
 		     int myCheck = transaction.get(transaction.size() - 1);
 		     //take item and get its count
 		     int count = mapSupport.get(myCheck);
@@ -196,6 +194,7 @@ public class AlgoRPGrowth {
 
 		   // We create the header table for the tree using the calculated support of single items
 		   tree.createHeaderList(mapSupport);
+		   
 		   // (5) We start to mine the RP-Tree by calling the recursive method.
 		   // Initially, the prefix alpha is empty.
 		   // if at least one item is not frequent
@@ -247,7 +246,7 @@ public class AlgoRPGrowth {
 //				}
 //				System.out.println("\n");
 ////						========== END DEBUG =======
-//				System.out.println(tree);
+//				System.out.println(tree); --constructs a visual representation of the tree to assist with debugging.
 
 		   // We will check if the RPtree contains a single path
 		   boolean singlePath = true;
@@ -259,7 +258,7 @@ public class AlgoRPGrowth {
 		     singlePath = false;
 		   }else {
 		     // Otherwise,
-		     // if the root has exactly one child, we need to recursively check childs
+		     // if the root has exactly one child, we need to recursively check children
 		     // of the child to see if they also have one child
 		     RPNode currentNode = tree.root.childs.get(0);
 		     while(true){
@@ -282,28 +281,12 @@ public class AlgoRPGrowth {
 		     }
 		   }
 		   // Case 1: the RPtree contains a single path
+		   //If the prefix is NOT the root and there is a single path
 		   if ((singlePath) && (prefixLength > 0))
-		   {
-/*			   // -- Blake / Ryan -- 11-2-18
-			   //if the prefix is NOT the root (prefixLength > 0 -- i think --Ryan--)
-			   if(prefixLength > 0) {
-*/				    
+		   {		    
 				   saveAllCombinationsOfPrefixPath(rpNodeTempBuffer, position, prefix, prefixLength);
-/*			   }
-			   else {		
-				   for (int i = tree.headerList.size() - 1; i >= 0; i--) {
-					   Integer item = tree.headerList.get(i);
-					   int support = mapSupport.get(item);
-					   prefix[prefixLength] = item;
-					   if(support < this.minSupportRelative) {
-						   System.out.println(support + "support");
-						   System.out.println(this.minSupportRelative);
-						   saveAllCombinationsOfPrefixPath(rpNodeTempBuffer, position, prefix, prefixLength);
-					   }
-				   }
-			   }*/
-			   		
-		   }else {
+		   }
+		   else {
 		     // For each rare item in the header table list of the tree in reverse order.
 		     for(int i = tree.headerList.size()-1; i>=0; i--){
 		       // get the item
@@ -313,22 +296,23 @@ public class AlgoRPGrowth {
 		       int support = mapSupport.get(item);
 		       if((prefixLength == 0) && (support >= minSupportRelative))
 							return;
-		       // Create Beta by concatening prefix Alpha by adding the current item to alpha
+		       // Create Beta by concatenating prefix Alpha by adding the current item to alpha
 		       prefix[prefixLength] = item;
 
 		       // calculate the support of the new prefix beta
 		       int betaSupport = (prefixSupport < support) ? prefixSupport: support;
 		       
 		       // save beta to the output file
-		       															//We need to modify this -- I think.  Ryan
+		       
+		       //If not the root OR support < minimum relative support; save item set
 		       if ((prefixLength > 0) || (support < this.minSupportRelative))
 		       		saveItemset(prefix, prefixLength+1, betaSupport);
 		     
 
 		       if(prefixLength+1 < maxPatternLength){
 		         // === (A) Construct beta's conditional pattern base ===
-		         // It is a subdatabase which consists of the set of prefix paths
-		         // in the RP-tree co-occuring with the prefix pattern.
+		         // It is a sub-database which consists of the set of prefix paths
+		         // in the RP-tree co-occurring with the prefix pattern.
 		         List<List<RPNode>> prefixPaths = new ArrayList<List<RPNode>>();
 		         RPNode path = tree.mapItemNodes.get(item);
 
@@ -344,7 +328,6 @@ public class AlgoRPGrowth {
 		             // add this node.
 		             prefixPath.add(path);   // NOTE: we add it just to keep its support,
 		             // actually it should not be part of the prefixPath
-		             // ####
 		             int pathCount = path.counter;
 
 		             //Recursively add all the parents of this node.
@@ -363,17 +346,17 @@ public class AlgoRPGrowth {
 		               }
 		               parent = parent.parent;
 		             }
-		             // add the path to the list of prefixpaths
+		             // add the path to the list of prefix paths
 		             prefixPaths.add(prefixPath);
 		           }
-		           // We will look for the next prefixpath
+		           // We will look for the next prefix path
 		           path = path.nodeLink;
 		         }
 
 		         // (B) Construct beta's conditional RP-Tree
 		         // Create the tree.
 		         RPTree treeBeta = new RPTree();
-		         // Add each prefixpath in the RP-tree.
+		         // Add each prefix path in the RP-tree.
 		         for(List<RPNode> prefixPath : prefixPaths){
 		           treeBeta.addPrefixPath(prefixPath, mapSupportBeta, minSupportRelative, minRareSupportRelative); 
 		         }
@@ -397,7 +380,7 @@ public class AlgoRPGrowth {
 		  * @param prefix the current prefix
 		  * @param prefixLength the current prefix length
 		  * @param prefixPath the prefix path
-		  * @throws IOException if exception while writting to output file
+		  * @throws IOException if exception while writing to output file
 		  */
 		 private void saveAllCombinationsOfPrefixPath(RPNode[] rpNodeTempBuffer, int position,
 		     int[] prefix, int prefixLength) throws IOException {
@@ -409,10 +392,8 @@ public class AlgoRPGrowth {
 		   // and output them
 		   // We use bits to generate all subsets.
 		loop1:	for (long i = 1, max = 1 << position; i < max; i++) {
-
 		     // we create a new subset
 		     int newPrefixLength = prefixLength;
-
 		     // for each bit
 		     for (int j = 0; j < position; j++) {
 		       // check if the j bit is set to 1
@@ -424,14 +405,10 @@ public class AlgoRPGrowth {
 		         }
 
 		         prefix[newPrefixLength++] = rpNodeTempBuffer[j].itemID;
-		         // 2018-03-18: REMOVED THE FOLLOWING "IF" to fix
-		         // support counting error.
-//							if(support == 0) {
 		           support = rpNodeTempBuffer[j].counter;
-//							}
 		       }
 		     }
-		     // save the itemset
+		     // save the item set
 		     saveItemset(prefix, newPrefixLength, support);
 		   }
 		 }
@@ -483,23 +460,23 @@ public class AlgoRPGrowth {
 
 
 		 /**
-		  * Write a frequent itemset that is found to the output file or
+		  * Write a frequent item set that is found to the output file or
 		  * keep into memory if the user prefer that the result be saved into memory.
 		  */
 		 private void saveItemset(int [] itemset, int itemsetLength, int support) throws IOException {
 
-		   // increase the number of itemsets found for statistics purpose
+		   // increase the number of item sets found for statistics purpose
 		   itemsetCount++;
 
 		   // if the result should be saved to a file
 		   if(writer != null){
-		     // copy the itemset in the output buffer and sort items
+		     // copy the item set in the output buffer and sort items
 		     System.arraycopy(itemset, 0, itemsetOutputBuffer, 0, itemsetLength);
 		     Arrays.sort(itemsetOutputBuffer, 0, itemsetLength);
 
 		     // Create a string buffer
 		     StringBuilder buffer = new StringBuilder();
-		     // write the items of the itemset
+		     // write the items of the item set
 		     for(int i=0; i< itemsetLength; i++){
 		       buffer.append(itemsetOutputBuffer[i]);
 		       if(i != itemsetLength-1){
@@ -557,6 +534,4 @@ public class AlgoRPGrowth {
 		 public void setMaximumPatternLength(int length) {
 		   maxPatternLength = length;
 		 }
-
-	
 }
