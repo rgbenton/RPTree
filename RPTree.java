@@ -24,19 +24,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ca.pfv.spmf.algorithms.frequentpatterns.fpgrowth.AlgoFPGrowth;
-import ca.pfv.spmf.algorithms.frequentpatterns.fpgrowth.FPNode;
-import ca.pfv.spmf.algorithms.frequentpatterns.rpgrowth.RPNode;
 import ca.pfv.spmf.patterns.itemset_array_integers_with_count.Itemset;
 
 /**
- * This is an implementation of a FPTree as used by the FPGrowth algorithm.
+ * This is an implementation of a RPTree  as used by the RPGrowth algorithm.
  *
- * @see FPNode
+ * @see RPNode
  * @see Itemset
- * @see AlgoFPGrowth
+ * @see AlgoRPGrowth
  * @author Philippe Fournier-Viger, Ryan Benton, Blake Johns
  */
+
 public class RPTree {
 	// List of items in the header table
 		List<Integer> headerList = null;
@@ -189,5 +187,7 @@ public class RPTree {
 			// append child nodes
 			temp += root.toString("");
 			return temp;
-		}		
+		}
+
+		
 }
