@@ -10,10 +10,16 @@ import ca.pfv.spmf.algorithms.associationrules.agrawal94_association_rules.Assoc
 import ca.pfv.spmf.algorithms.frequentpatterns.rpgrowth.AlgoRPGrowth;
 import ca.pfv.spmf.patterns.itemset_array_integers_with_count.Itemsets;
 
+/**
+ * Example of how to mine all association rules with FPGROWTH with the lift,
+ * from the source code.
+ * 
+ * @author Philippe Fournier-Viger (Copyright 2008), Ryan Benton, Blake Johns
+ */
 public class MainTestAllAssociationRules_RPGrowth_saveToMemory {
 	public static void main(String [] arg) throws FileNotFoundException, IOException{
 		// Loading the binary context
-		String input = fileToPath("contextZart.txt");
+		String input = fileToPath("contextIGB.txt");
 		
 		// By changing the following lines to some other values
 		// it is possible to restrict the number of items in the antecedent and
@@ -21,7 +27,7 @@ public class MainTestAllAssociationRules_RPGrowth_saveToMemory {
 		int maxConsequentLength = 100;
 		int maxAntecedentLength = 100;
 		
-		// STEP 1: Applying the RP-GROWTH algorithm (An implementation of the FP-Growth algorithm) to find rare itemsets     
+		// STEP 1: Applying the RP-GROWTH algorithm (An implementation of the FP-Growth algorithm) to find rare item sets     
 		double minsup = .6;
 		double minraresup = 0.1;
 		AlgoRPGrowth rpgrowth = new AlgoRPGrowth();
@@ -31,7 +37,7 @@ public class MainTestAllAssociationRules_RPGrowth_saveToMemory {
 		patterns.printItemsets(databaseSize);
 		rpgrowth.printStats();
 		
-		//STEP 2: Generating all rules from the set of frequent itemsets (based on Agrawal & Srikant, 94)
+		//STEP 2: Generating all rules from the set of frequent item sets (based on Agrawal & Srikant, 94)
 		double  minconf = 0.60;
 		AlgoAgrawalFaster94 algoAgrawal = new AlgoAgrawalFaster94();
 		// 
@@ -51,6 +57,4 @@ public class MainTestAllAssociationRules_RPGrowth_saveToMemory {
 		URL url = MainTestAllAssociationRules_FPGrowth_saveToMemory.class.getResource(filename);
 		 return java.net.URLDecoder.decode(url.getPath(),"UTF-8");
 	}
-
 }
-
