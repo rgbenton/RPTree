@@ -19,7 +19,7 @@ import ca.pfv.spmf.patterns.itemset_array_integers_with_count.Itemsets;
 public class MainTestAllAssociationRules_RPGrowth_saveToMemory {
 	public static void main(String [] arg) throws FileNotFoundException, IOException{
 		// Loading the binary context
-		String input = fileToPath("contextIGB.txt");
+		String input = fileToPath("contextRP.txt");
 		
 		// By changing the following lines to some other values
 		// it is possible to restrict the number of items in the antecedent and
