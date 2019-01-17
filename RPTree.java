@@ -1,5 +1,22 @@
 package ca.pfv.spmf.algorithms.frequentpatterns.rpgrowth;
 
+/* This file is copyright (c) 2008-2015 Philippe Fournier-Viger
+*
+* This file is part of the SPMF DATA MINING SOFTWARE
+* (http://www.philippe-fournier-viger.com/spmf).
+*
+* SPMF is free software: you can redistribute it and/or modify it under the
+* terms of the GNU General Public License as published by the Free Software
+* Foundation, either version 3 of the License, or (at your option) any later
+* version.
+*
+* SPMF is distributed in the hope that it will be useful, but WITHOUT ANY
+* WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+* A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+* You should have received a copy of the GNU General Public License along with
+* SPMF. If not, see <http://www.gnu.org/licenses/>.
+*/
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -7,8 +24,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ca.pfv.spmf.algorithms.frequentpatterns.fpgrowth.AlgoFPGrowth;
+import ca.pfv.spmf.algorithms.frequentpatterns.fpgrowth.FPNode;
 import ca.pfv.spmf.algorithms.frequentpatterns.rpgrowth.RPNode;
+import ca.pfv.spmf.patterns.itemset_array_integers_with_count.Itemset;
 
+/**
+ * This is an implementation of a FPTree as used by the FPGrowth algorithm.
+ *
+ * @see FPNode
+ * @see Itemset
+ * @see AlgoFPGrowth
+ * @author Philippe Fournier-Viger, Ryan Benton, Blake Johns
+ */
 public class RPTree {
 	// List of items in the header table
 		List<Integer> headerList = null;
@@ -31,7 +59,7 @@ public class RPTree {
 		}
 
 		/**
-		 * Method for adding a transaction to the rp-tree (for the initial construction
+		 * Method for adding a transaction to the RP-tree (for the initial construction
 		 * of the RP-Tree).
 		 * @param transaction
 		 */
@@ -100,7 +128,8 @@ public class RPTree {
 			// (and we ignore the first element of the prefix path)
 			for(int i = prefixPath.size() -1; i >=1; i--){ 
 				RPNode pathItem = prefixPath.get(i);
-				// if the item is frequent we skip it
+				// if the item is frequent(if the item is below the relative min rare support and
+				// above the relative min support threshold) we skip it.
 				if(mapSupportBeta.get(pathItem.itemID) < relativeMinsupp && mapSupportBeta.get(pathItem.itemID) >= relativeMinRareSupp){
 		
 					// look if there is a node already in the RP-Tree
@@ -160,7 +189,5 @@ public class RPTree {
 			// append child nodes
 			temp += root.toString("");
 			return temp;
-		}
-
-		
+		}		
 }
