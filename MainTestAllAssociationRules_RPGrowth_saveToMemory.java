@@ -28,7 +28,7 @@ public class MainTestAllAssociationRules_RPGrowth_saveToMemory {
 		int maxAntecedentLength = 100;
 		
 		// STEP 1: Applying the RP-GROWTH algorithm (An implementation of the FP-Growth algorithm) to find rare item sets     
-		double minsup = .6;
+		double minsup = 0.6;
 		double minraresup = 0.1;
 		AlgoRPGrowth rpgrowth = new AlgoRPGrowth();
 		rpgrowth.setMaximumPatternLength(maxAntecedentLength + maxConsequentLength);
