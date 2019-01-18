@@ -33,7 +33,7 @@ NOTE: in between the rare itemset list and the association rules is a stats sect
  * pattern 0: 4 support : 1
  * L2
  * pattern 1: 1 4 support : 1
- * pattern 2: 2 4 support : 4
+ * pattern 2: 2 4 support : 1
  * L3
  * pattern 3: 1 2 4 support 1
  * -------------------------------
@@ -43,6 +43,59 @@ NOTE: in between the rare itemset list and the association rules is a stats sect
  * rule 2: 2 4 ==> 1 support : 0.2 (1/5) confidence : 1.0
  * rule 3: 1 4 ==> 2 support : 0.2 (1/5) confidence : 1.0
  * rule 4: 4 ==> 1 2 support : 0.2 (1/5) confidence : 1.0
+ 
+NOW an example increasing the minsup to .8
+ *------- RARE ITEMSETS -------
+ * L0
+ * L1
+ * pattern 0: 4 support : 1
+ * pattern 1: 5 support : 3
+ * L2
+ * pattern 2: 1 4 support : 1
+ * pattern 3: 2 4 support : 1
+ * pattern 4: 1 5 support : 2
+ * pattern 5: 3 5 support : 3
+ * pattern 6: 2 5 support : 3
+ * L3
+ * pattern 7: 1 2 4 support : 1
+ * pattern 8: 1 3 5 support : 2
+ * pattern 9: 2 3 5 support : 3
+ * pattern 10: 1 2 5 support : 2
+ * L4
+ * pattern 11: 1 2 3 5 support : 2
+ * -------------------------------
+ * ------- ASSOCIATION RULES -------
+ * rule 0:  4 ==> 1 support :  0.2 (1/5) confidence :  1.0
+ * rule 1:  5 ==> 1 support :  0.4 (2/5) confidence :  0.6666666666666666
+ * rule 2:  4 ==> 2 support :  0.2 (1/5) confidence :  1.0
+ * rule 3:  5 ==> 2 support :  0.6 (3/5) confidence :  1.0
+ * rule 4:  5 ==> 3 support :  0.6 (3/5) confidence :  1.0
+ * rule 5:  2 4 ==> 1 support :  0.2 (1/5) confidence :  1.0
+ * rule 6:  1 4 ==> 2 support :  0.2 (1/5) confidence :  1.0
+ * rule 7:  4 ==> 1 2 support :  0.2 (1/5) confidence :  1.0
+ * rule 8:  2 5 ==> 1 support :  0.4 (2/5) confidence :  0.6666666666666666
+ * rule 9:  1 5 ==> 2 support :  0.4 (2/5) confidence :  1.0
+ * rule 10:  5 ==> 1 2 support :  0.4 (2/5) confidence :  0.6666666666666666
+ * rule 11:  3 5 ==> 1 support :  0.4 (2/5) confidence :  0.6666666666666666
+ * rule 12:  1 5 ==> 3 support :  0.4 (2/5) confidence :  1.0
+ * rule 13:  5 ==> 1 3 support :  0.4 (2/5) confidence :  0.6666666666666666
+ * rule 14:  3 5 ==> 2 support :  0.6 (3/5) confidence :  1.0
+ * rule 15:  2 5 ==> 3 support :  0.6 (3/5) confidence :  1.0
+ * rule 16:  5 ==> 2 3 support :  0.6 (3/5) confidence :  1.0
+ * rule 17:  2 3 5 ==> 1 support :  0.4 (2/5) confidence :  0.6666666666666666
+ * rule 18:  1 3 5 ==> 2 support :  0.4 (2/5) confidence :  1.0
+ * rule 19:  1 2 5 ==> 3 support :  0.4 (2/5) confidence :  1.0
+ * rule 20:  3 5 ==> 1 2 support :  0.4 (2/5) confidence :  0.6666666666666666
+ * rule 21:  2 5 ==> 1 3 support :  0.4 (2/5) confidence :  0.6666666666666666
+ * rule 22:  1 5 ==> 2 3 support :  0.4 (2/5) confidence :  1.0
+ * rule 23:  5 ==> 1 2 3 support :  0.4 (2/5) confidence :  0.6666666666666666
+ 
+ 
+ 
+# Explaination of the Data
+ The "RARE ITEMSETS" section displays the particular rare rules that have been derived from the original data set. This is representating the number of time said item or pair of items occured together. Increasing and decreaing the minsup or minraresup variables adjust the range of support of what is considered "rare" (as you can see in the difference between the first example and the second).
+  The "ASSOCIATION RULES" section displays the complete association breakdown between the set and the implication (e.g. in example 2: "rule 18: 1 3 5 ==> 2 support : 0.4 (2/5) confidence : 1.0"). This represents the implication between X ==> Y, the support for said implication (in percentage and rationale representation), and the confidence of this occurance (expressed in percentage)
+
  
 # Contributing
 
