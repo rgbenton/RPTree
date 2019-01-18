@@ -37,7 +37,7 @@ public class MainTestAllAssociationRules_RPGrowth_saveToMemory {
 		patterns.printItemsets(databaseSize);
 		rpgrowth.printStats();
 		
-		//STEP 2: Generating all rules from the set of frequent item sets (based on Agrawal & Srikant, 94)
+		//STEP 2: Generating all rules from the set of rare item sets (based on Agrawal & Srikant, 94)
 		double  minconf = 0.60;
 		AlgoAgrawalFaster94 algoAgrawal = new AlgoAgrawalFaster94();
 		// 
