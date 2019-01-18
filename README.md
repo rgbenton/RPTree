@@ -1,6 +1,6 @@
 # RPTree
 This project explores Rare Pattern Assocation Mining by taking advantage of the FP-Tree data structure.
-The goal is to accumulate all rare patterns (by our definition) within a given data set in a more efficient 
+The goal is to accumulate all rare patterns (by our definition) within a given transactional data set in a more efficient 
 manner. 
 
 # Getting Started
