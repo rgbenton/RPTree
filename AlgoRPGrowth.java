@@ -1,4 +1,4 @@
-package ca.pfv.spmf.algorithms.frequentpatterns.rpgrowth;
+package rpTree;
 
 /* This file is copyright (c) 2008-2015 Philippe Fournier-Viger
 *
@@ -32,9 +32,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ca.pfv.spmf.patterns.itemset_array_integers_with_count.Itemset;
-import ca.pfv.spmf.patterns.itemset_array_integers_with_count.Itemsets;
-import ca.pfv.spmf.tools.MemoryLogger;
+import rpTree.Itemset;
+import rpTree.Itemsets;
+import rpTree.MemoryLogger;
 
 /** 
  * This is an implementation of the FPGROWTH algorithm (Han et al., 2004).
