@@ -1,4 +1,4 @@
-package ca.pfv.spmf.algorithms.frequentpatterns.rpgrowth;
+package rpTree;
 
 /* This file is copyright (c) 2008-2015 Philippe Fournier-Viger
 *
@@ -24,14 +24,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ca.pfv.spmf.patterns.itemset_array_integers_with_count.Itemset;
+import rpTree.Itemset;
 
 /**
- * This is an implementation of a RPTree  as used by the RPGrowth algorithm.
+ * This is an implementation of a FPTree  as used by the FPGrowth algorithm.
  *
- * @see RPNode
+ * @see FPNode
  * @see Itemset
- * @see AlgoRPGrowth
+ * @see AlgoFPGrowth
  * @author Philippe Fournier-Viger, Ryan Benton, Blake Johns
  */
 
