@@ -1,11 +1,11 @@
 # RPTree
-This project explores Rare Pattern Assocation Mining by taking advantage of the FP-Tree data structure.
-The goal is to accumulate all rare patterns (by our definition) within a given transactional data set in a more efficient 
-manner. 
+This project explores Rare Pattern Assocation Mining by taking implementing the FP-Tree data structure.
+The goal is to accumulate all rare patterns by definition ("RP-Tree: Rare Pattern Mining", A. Cuzzocrea and U. Dayal (Eds.): Data Warehousing and Knowledge Discovery 2011, LNCS 6862, pp. 277–288, 2011.) within a given transactional data set in a more efficient 
+manner. In these project files, we have modified existing FP (frequent pattern) code within the SPMF package (which can be found available here :http://www.philippe-fournier-viger.com/spmf/index.php?link=download.php). The files available in the repository are subsets of the SPMF v2.36 package
 
 # Getting Started
-These instruction swill get you a copy of the project up and running on your local machine for development and
-testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and
+testing purposes.
 
 # Prerequisites
 To run the project it is suggested to use a IDE such as Eclipse. 
@@ -15,7 +15,7 @@ Once Eclipse has been installed go through the following steps to execute the pr
 * Open Eclipse. Select "File -> New -> Java Project"
 * Type the name of the project and select "Finish"
 * Once your project is created, "Select your project name -> new -> package"
-* Name your package
+* Name your package "rpTree" (NOTE: if you use a different package name, you will manually need to adjust all imports/packages)
 * Download the files from Project Files and move the files to the package location
   * To do this: "Right click package -> properties -> open source in system explorer (right side of the location textbox)
   * Open the "src" folder -> bring files into this location
@@ -45,7 +45,8 @@ NOTE: in between the rare itemset list and the association rules is a stats sect
  * rule 4: 4 ==> 1 2 support : 0.2 (1/5) confidence : 1.0
  
 NOW an example increasing the minsup to .8
- *------- RARE ITEMSETS -------
+
+ * ------- RARE ITEMSETS -------
  * L0
  * L1
  * pattern 0: 4 support : 1
@@ -98,6 +99,7 @@ NOW an example increasing the minsup to .8
 
  
 # Contributing
+If pulled and changes are made please branch initially. Once changes are stable please merge and include name, date of change, and your fix to the code in the comments of the corresponding source file and in the merge comments.
 
 # Authors
  * Ryan Benton - Initial Work - rgbenton
@@ -120,6 +122,6 @@ NOW an example increasing the minsup to .8
 * SPMF. If not, see <http://www.gnu.org/licenses/>.
 
 # Acknowledgements
- This is an implementation of the FPGROWTH algorithm (Han et al., 2004).
- Han, J., Pei, J., & Yin, Y. (2000, May). Mining frequent patterns without candidate generation. In ACM SIGMOD Record (Vol. 29, No. 2,    pp. 1-12). ACM.
- The source code can be found here: http://www.philippe-fournier-viger.com/spmf/index.php?link=download.php
+ * This is a modification of existing FP (frequent pattern) code and an implementation of the FPGROWTH algorithm (Han et al., 2004). Han, J., Pei, J., & Yin, Y. (2000, May). Mining frequent patterns without candidate generation. In ACM SIGMOD Record (Vol. 29, No. 2,    pp. 1-12). ACM.
+ The source code can be found here: http://www.philippe-fournier-viger.com/spmf/index.php?link=download.php The files included are a subset of the SPMF v2.36 package.
+ * A. Cuzzocrea and U. Dayal (Eds.): Data Warehousing and Knowledge Discovery 2011, LNCS 6862, pp. 277–288, 2011.
