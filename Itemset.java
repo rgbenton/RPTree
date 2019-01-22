@@ -1,9 +1,9 @@
-package ca.pfv.spmf.patterns.itemset_array_integers_with_count;
+package rpTree;
 import java.util.Arrays;
 import java.util.List;
 
-import ca.pfv.spmf.algorithms.ArraysAlgos;
-import ca.pfv.spmf.patterns.AbstractOrderedItemset;
+import rpTree.ArraysAlgos;
+import rpTree.AbstractOrderedItemset;
 
 /* This file is copyright (c) 2008-2012 Philippe Fournier-Viger
 * 
