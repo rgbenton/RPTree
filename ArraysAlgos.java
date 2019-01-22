@@ -1,4 +1,4 @@
-package ca.pfv.spmf.algorithms;
+package rpTree;
 
 import java.util.Arrays;
 import java.util.Comparator;
