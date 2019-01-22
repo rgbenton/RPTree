@@ -1,4 +1,4 @@
-package ca.pfv.spmf.patterns.rule_itemset_array_integer_with_count;
+package rpTree;
 
 /* This file is copyright (c) 2008-2012 Philippe Fournier-Viger
 * 
@@ -17,7 +17,7 @@ package ca.pfv.spmf.patterns.rule_itemset_array_integer_with_count;
 */
 
 
-import ca.pfv.spmf.patterns.itemset_array_integers_with_count.Itemset;
+import rpTree.Itemset;
 
 /**
  * This class represent an association rule, where itemsets are arrays of integers.
