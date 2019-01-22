@@ -18,8 +18,8 @@ Once Eclipse has been installed go through the following steps to execute the pr
 * Name your package "rpTree" (NOTE: if you use a different package name, you will manually need to adjust all imports/packages)
 * Download the files from Project Files and move the files to the package location
   * To do this: "Right click package -> properties -> open source in system explorer (right side of the location textbox)
-  * Open the "src" folder -> bring files into this location
-* Adjust the package name / import calls to fit your personal created package name.
+  * Open the "rpTree" folder -> bring files into this location
+* The project is now able to be compiled.
 
 # Running the Tests
 To run the test, open up the "MainTestAllAssociationRules_RPGrowth.java" file. The text file name has already been set ("contextRP.txt"), and for the purpose of the default test the minsup (which serves as the maximum threshold of our rare rules) and the minraresup (which serves as the minimum threshold of our rare rules) have been set at 0.6 and 0.1 accordingly.
