@@ -1,4 +1,4 @@
-package ca.pfv.spmf.tools;
+package rpTree;
 /*
  *  Copyright (c) 2008-2012 Philippe Fournier-Viger
  * 
