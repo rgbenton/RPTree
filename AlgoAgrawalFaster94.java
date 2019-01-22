@@ -1,4 +1,4 @@
-package ca.pfv.spmf.algorithms.associationrules.agrawal94_association_rules;
+package rpTree;
 
 /* This file is copyright (c) 2008-2015Philippe Fournier-Viger
 * 
@@ -24,9 +24,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import ca.pfv.spmf.algorithms.ArraysAlgos;
-import ca.pfv.spmf.patterns.itemset_array_integers_with_count.Itemset;
-import ca.pfv.spmf.patterns.itemset_array_integers_with_count.Itemsets;
+import rpTree.ArraysAlgos;
+import rpTree.Itemset;
+import rpTree.Itemsets;
 
 /**
  * This is an implementation of the "faster algorithm" for generating association rules,
