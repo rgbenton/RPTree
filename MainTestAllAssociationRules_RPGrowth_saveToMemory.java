@@ -1,14 +1,14 @@
-package ca.pfv.spmf.test;
+package rpTree;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 
-import ca.pfv.spmf.algorithms.associationrules.agrawal94_association_rules.AlgoAgrawalFaster94;
-import ca.pfv.spmf.algorithms.associationrules.agrawal94_association_rules.AssocRules;
-import ca.pfv.spmf.algorithms.frequentpatterns.rpgrowth.AlgoRPGrowth;
-import ca.pfv.spmf.patterns.itemset_array_integers_with_count.Itemsets;
+import rpTree.AlgoAgrawalFaster94;
+import rpTree.AssocRules;
+import rpTree.AlgoRPGrowth;
+import rpTree.Itemsets;
 
 /**
  * Example of how to mine rare association rules with RPGROWTH,
