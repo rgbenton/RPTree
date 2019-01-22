@@ -1,4 +1,4 @@
-package ca.pfv.spmf.algorithms.associationrules.agrawal94_association_rules;
+package rpTree;
 
 /* This file is copyright (c) 2008-2012 Philippe Fournier-Viger
 * 
@@ -17,7 +17,7 @@ package ca.pfv.spmf.algorithms.associationrules.agrawal94_association_rules;
 * SPMF. If not, see <http://www.gnu.org/licenses/>.
 */
 
-import ca.pfv.spmf.patterns.rule_itemset_array_integer_with_count.Rule;
+import rpTree.Rule;
 
 /**
  * This class represent an association rule used by the Agrawal algorithm such that it uses the lift mesure.
