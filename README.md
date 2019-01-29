@@ -124,4 +124,5 @@ If pulled and changes are made please branch initially. Once changes are stable 
 # Acknowledgements
  * This is a modification of existing FP (frequent pattern) code and an implementation of the FPGROWTH algorithm (Han et al., 2004). Han, J., Pei, J., & Yin, Y. (2000, May). Mining frequent patterns without candidate generation. In ACM SIGMOD Record (Vol. 29, No. 2,    pp. 1-12). ACM.
  The source code can be found here: http://www.philippe-fournier-viger.com/spmf/index.php?link=download.php The files included are a subset of the SPMF v2.36 package.
- * A. Cuzzocrea and U. Dayal (Eds.): Data Warehousing and Knowledge Discovery 2011, LNCS 6862, pp. 277–288, 2011.
+ * Sidney Tsang, Yun Sing Koh, Gillian Dobbie, RP-Tree: Rare Pattern Tree Mining, International Conference of Data Warehousing and Knowledge Discovery, 277-288 (2011)
+
