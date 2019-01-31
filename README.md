@@ -3,6 +3,8 @@ This project explores Rare Pattern Assocation Mining by taking implementing the 
 The goal is to accumulate all rare patterns by definition ("RP-Tree: Rare Pattern Mining", A. Cuzzocrea and U. Dayal (Eds.): Data Warehousing and Knowledge Discovery 2011, LNCS 6862, pp. 277–288, 2011.) within a given transactional data set in a more efficient 
 manner. In these project files, we have modified existing FP (frequent pattern) code within the SPMF package (which can be found available here :http://www.philippe-fournier-viger.com/spmf/index.php?link=download.php). The files available in the repository are subsets of the SPMF v2.36 package
 
+NOTE: The code for the RP-Tree has been incorporated into the SPMF package, which can be found at the previously mentioned link. 
+
 # Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and
 testing purposes.
