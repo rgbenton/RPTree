@@ -1,6 +1,6 @@
-package rpTree;
+package ca.pfv.spmf.algorithms.frequentpatterns.rpgrowth;
 
-/* This file is copyright (c) 2008-2015 Philippe Fournier-Viger
+/*This file is copyright (c) 2018 Ryan Benton and Blake Johns
 *
 * This file is part of the SPMF DATA MINING SOFTWARE
 * (http://www.philippe-fournier-viger.com/spmf).
@@ -32,17 +32,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import rpTree.Itemset;
-import rpTree.Itemsets;
-import rpTree.MemoryLogger;
+import ca.pfv.spmf.patterns.itemset_array_integers_with_count.Itemset;
+import ca.pfv.spmf.patterns.itemset_array_integers_with_count.Itemsets;
+import ca.pfv.spmf.tools.MemoryLogger;
 
 /** 
- * This is an implementation of the FPGROWTH algorithm (Han et al., 2004).
- * FPGrowth is described here:
- * <br/><br/>
+ * This is an implementation of the Rare Pattern Tree Mining algorithm using the FP-Growth algorithm.
+ * More information on rare pattern tree mining can be found in the paper here:
+ * "RP-Tree: Rare Pattern Tree Mining",
+ * A. Cuzzocrea and U. Dayal (Eds.): Data Warehousing and Knowledge Discovery 2011, LNCS 6862, pp. 277�288, 2011
  * 
- * Han, J., Pei, J., & Yin, Y. (2000, May). Mining frequent patterns without candidate generation. In ACM SIGMOD Record (Vol. 29, No. 2, pp. 1-12). ACM
- * <br/><br/>
+ * The FP-Growth algorithm was originally created by Philippe Fournier-Viger and modified by 
+ * Blake Johns and Ryan Benton.
  * 
  * This is an optimized version that saves the result to a file
  * or keep it into memory if no output path is provided
@@ -181,20 +182,24 @@ public class AlgoRPGrowth {
 		     //Add the sorted items to the RP tree
 		     //If (last item in sorted transaction is < minRelSup, we accept the transaction)   		     
 		     //get the last item in transaction; because the last item in the transaction is the smallest count size
-		     int myCheck = transaction.get(transaction.size() - 1);
-		     //take item and get its count
-		     int count = mapSupport.get(myCheck);
-		     //if the last item is below minSupportRelative then it is Rare by our definition, so it is of interest and added to the tree
-		     if(count < this.minSupportRelative) {
-		    	 tree.addTransaction(transaction);
-		     }	    	 
+		     
+		     	 if(!transaction.isEmpty()) {/* BUG FIX to account for a check against an empty transaction 01/29/2020 Blake Johns*/
+		     		 int myCheck = transaction.get(transaction.size() - 1);
+		     		 //take item and get its count
+		     		 int count = mapSupport.get(myCheck);
+		     		 //if the last item is below minSupportRelative then it is Rare by our definition, so it is of interest and added to the tree
+		     		 if(count < this.minSupportRelative) {
+		     			 tree.addTransaction(transaction);
+		     		 }	    	 
+		     	 }
 		   }
+		   
 		   // close the input file
 		   reader.close();
 
 		   // We create the header table for the tree using the calculated support of single items
 		   tree.createHeaderList(mapSupport);
-		   
+		  
 		   // (5) We start to mine the RP-Tree by calling the recursive method.
 		   // Initially, the prefix alpha is empty.
 		   // if at least one item is not frequent
@@ -460,7 +465,7 @@ public class AlgoRPGrowth {
 
 
 		 /**
-		  * Write a frequent item set that is found to the output file or
+		  * Write an infrequent item set that is found to the output file or
 		  * keep into memory if the user prefer that the result be saved into memory.
 		  */
 		 private void saveItemset(int [] itemset, int itemsetLength, int support) throws IOException {
@@ -510,7 +515,7 @@ public class AlgoRPGrowth {
 		  * Print statistics about the algorithm execution to System.out.
 		  */
 		 public void printStats() {
-		   System.out.println("=============  RP-GROWTH 0.96r19 - STATS =============");
+		   System.out.println("=============  RP-GROWTH 2.38 - STATS =============");
 		   long temps = endTime - startTimestamp;
 		   System.out.println(" Transactions count from database : " + transactionCount);
 		   System.out.print(" Max memory usage: " + MemoryLogger.getInstance().getMaxMemory() + " mb \n");
